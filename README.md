@@ -15,7 +15,7 @@ Project's playbooks
 Some piece of wisdom
 --------------------
 
-Block quotes consist of indented body elements:
+If you don't khow what is ansible, there is the best way to describe it:
 
     Ansible is the simplest way to automate apps and IT infrastructure.
 

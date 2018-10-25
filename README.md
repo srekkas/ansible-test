@@ -5,11 +5,12 @@ Just project for ansible tests
 Project's playbooks
 -------------------
 
-:ping.yml: This playbook makes ping test.
+:ping.yml: This playbook
+           makes ping test.
 
-:ifconfig.yml: This playbook check is there config.file.
+:ifconfig.yml: This playbook checks is there config.file.
 
-:prepare_nods.yml: This playbook prepare nodes for work.
+:prepare_nods.yml: This playbook prepares nodes for work.
 
 Some piece of wisdom
 --------------------

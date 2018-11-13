@@ -1,26 +1,26 @@
 ---
 sync_on_run: true
 templates:
-- test-module:
-     notes: Module test template
-     kind: Module,
-     data:
-        - group: all
-        - vars: {}
-        - args: ''
-        - module: ping
-        - inventory: localhost,
-     options:
-        - uptime: {args: uptime, module: shell}
-- test playbook:
-    notes: Playbook test template
-    kind: Task
-    data:
-        - vars: {become: true}
-        - playbook: main.yml
-        - inventory: localhost,
-    options:
-        - update: {playbook: other.yml}
+    - test-module:
+        notes: Module test template
+         kind: Module,
+         data:
+            - group: all
+            - vars: {}
+            - args: ''
+            - module: ping
+            - inventory: localhost,
+         options:
+            - uptime: {args: uptime, module: shell}
+    - test playbook:
+        notes: Playbook test template
+        kind: Task
+        data:
+            - vars: {become: true}
+            - playbook: main.yml
+            - inventory: localhost,
+        options:
+            - update: {playbook: other.yml}
 templates_rewrite: true
 view:
     fields:

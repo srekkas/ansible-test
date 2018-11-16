@@ -1,3 +1,0 @@
-- hosts: all
-      roles:
-         - { role: onegreyonewhite.wordpress_lamp_server }

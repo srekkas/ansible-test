@@ -1,9 +1,0 @@
-# inventory name: test-inventory
-
-[test-group]
-test-host-REP ansible_host=10.10.10.17
-
-[test-group:vars]
-ansible_user=ubuntu
-
-

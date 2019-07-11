@@ -8,8 +8,6 @@
         cache_valid_time: 86400
         upgrade: dist
 
-- hosts: all
-  tasks:
     - name: Update Packages on RedHat nodes
       when: ansible_os_family == 'RedHat'
       yum:

@@ -11,6 +11,8 @@ Project's playbooks
 
 * **prepare_nodes.yml**: This playbook prepares nodes for work.
 
+* **update.yml**: This playbook updates all packages on host.
+
 Some piece of wisdom
 --------------------
 

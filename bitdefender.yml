@@ -27,7 +27,7 @@
         remote_src: no
         
     - name: copy file and set permissions
-      file
+      file:
         dest: /tmp/bitdefender/installer
         mode: x
 

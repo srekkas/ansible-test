@@ -5,7 +5,7 @@
   tasks:      
     - name: Copy file 
       ansible.builtin.copy:
-        src: /tmp/installer.tar
+        src: /packages/installer.tar
         dest: /tmp/bitas.tar
         ignore_errors: yes
         

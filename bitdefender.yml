@@ -29,5 +29,5 @@
     - name: copy file and set permissions
       file:
         dest: /tmp/bitdefender/installer
-        mode: x
+        mode: a+x
 

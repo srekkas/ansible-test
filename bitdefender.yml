@@ -7,7 +7,6 @@
       ansible.builtin.copy:
         src: /packages/installer.tar
         dest: /tmp/bitas.tar
-        ignore_errors: yes
         
     - name: Copy file 
       ansible.builtin.copy:

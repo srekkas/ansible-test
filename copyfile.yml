@@ -1,0 +1,20 @@
+---  
+  
+  - hosts:
+    - all
+  gather_facts: False  
+  tasks:
+    - name: Creates directory
+      file:
+        path: /tmp/bitdefender
+        state: directory
+    
+    - name: Copy file 
+      ansible.builtin.copy:
+        src: /packages/installer.tar
+        dest: /tmp/bitas.tar
+        
+    - name: Copy file 
+      ansible.builtin.copy:
+        src: /packages/installer.tar
+        dest: /tmp/installer.tar

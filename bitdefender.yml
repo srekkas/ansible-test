@@ -8,3 +8,8 @@
         src: /opt/polemarch/packages/installer.tar
         dest: /tmp/bitdefender
         remote_src: no
+        
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: /opt/polemarch/packages/installer.tar
+        dest: /tmp/bitdefender

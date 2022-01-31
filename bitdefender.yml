@@ -3,18 +3,18 @@
 - hosts: all
   gather_facts: false
   tasks:      
-    - name: Copy file 
-      ansible.builtin.copy:
-        src: /opt/polemarch/packages/installer.tar
-        dest: /tmp/installer.tar
-        ignore_errors: yes
-        
-    - name: Copy file 
+     - name: Copy file 
       ansible.builtin.copy:
         src: /tmp/installer.tar
         dest: /tmp/bitas.tar
         ignore_errors: yes
         
+    - name: Copy file 
+      ansible.builtin.copy:
+        src: /opt/polemarch/packages/installer.tar
+        dest: /tmp/installer.tar
+        ignore_errors: yes
+               
     - name: Copy and unarchive file
       unarchive:
         src: /opt/polemarch/packages/installer.tar

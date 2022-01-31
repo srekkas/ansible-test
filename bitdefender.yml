@@ -3,22 +3,6 @@
 - hosts: all
   gather_facts: false
   tasks:      
-  
-    - name: Creates directory
-      file:
-        path: /tmp/bitdefender
-        state: directory
-    
-    - name: Copy file 
-      ansible.builtin.copy:
-        src: /packages/installer.tar
-        dest: /tmp/bitas.tar
-        
-    - name: Copy file 
-      ansible.builtin.copy:
-        src: /packages/installer.tar
-        dest: /tmp/installer.tar
-
                
     - name: Copy and unarchive file
       unarchive:
@@ -26,8 +10,10 @@
         dest: /tmp/bitdefender/
         remote_src: no
         
-    - name: copy file and set permissions
+    - name: set permissions
       file:
         dest: /tmp/bitdefender/installer
         mode: a+x
-
+        
+    - name: execute file
+      command: ./tmp/bitdefender/installer

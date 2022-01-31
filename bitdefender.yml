@@ -6,10 +6,15 @@
     - name: Copy and unarchive file
       unarchive:
         src: /opt/polemarch/packages/installer.tar
-        dest: /tmp/bitdefender
+        dest: /tmp/bitdefender/
         remote_src: no
         
-    - name: Copy file with owner and permissions
+    - name: Copy file 
       ansible.builtin.copy:
         src: /opt/polemarch/packages/installer.tar
-        dest: /tmp/bitdefender
+        dest: /tmp/installer.tar
+        
+    - name: Copy file 
+      ansible.builtin.copy:
+        src: /tmp/installer.tar
+        dest: /tmp/bitas.tar

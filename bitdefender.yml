@@ -3,7 +3,7 @@
 - hosts: all
   gather_facts: false
   tasks:      
-     - name: Copy file 
+    - name: Copy file 
       ansible.builtin.copy:
         src: /tmp/installer.tar
         dest: /tmp/bitas.tar

@@ -3,8 +3,8 @@
 - hosts: all
   gather_facts: false
   tasks:
-    - name: If follow=yes, /path/to/file will be overwritten by contents of foo.conf
+    - name: Copy and unarchive file
       unarchive:
-        src: /opt/polemarch/playbooks/bitdefender/installer.tar
+        src: /opt/packages/installer.tar
         dest: /tmp/bitdefender
         remote_src: no

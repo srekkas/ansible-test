@@ -11,13 +11,13 @@
         
     - name: Copy file 
       ansible.builtin.copy:
-        src: /opt/polemarch/packages/installer.tar
+        src: /packages/installer.tar
         dest: /tmp/installer.tar
-        ignore_errors: yes
+
                
     - name: Copy and unarchive file
       unarchive:
-        src: /opt/polemarch/packages/installer.tar
+        src: /packages/installer.tar
         dest: /tmp/bitdefender/
         remote_src: no
-        ignore_errors: yes
+

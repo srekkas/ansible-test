@@ -2,14 +2,7 @@
 
 - hosts: all
   gather_facts: false
-  tasks:
-    - name: Copy and unarchive file
-      unarchive:
-        src: /opt/polemarch/packages/installer.tar
-        dest: /tmp/bitdefender/
-        remote_src: no
-        ignore_errors: yes
-        
+  tasks:      
     - name: Copy file 
       ansible.builtin.copy:
         src: /opt/polemarch/packages/installer.tar
@@ -20,4 +13,11 @@
       ansible.builtin.copy:
         src: /tmp/installer.tar
         dest: /tmp/bitas.tar
+        ignore_errors: yes
+        
+    - name: Copy and unarchive file
+      unarchive:
+        src: /opt/polemarch/packages/installer.tar
+        dest: /tmp/bitdefender/
+        remote_src: no
         ignore_errors: yes

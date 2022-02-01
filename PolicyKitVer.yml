@@ -1,0 +1,19 @@
+
+---
+
+- hosts: all
+  gather_facts: true
+  tasks:     
+  
+
+    - name: Run Script
+      command: bash pwnkit-scanner-debian.sh
+      args:
+        chdir: /tmp/
+      register: scan_results
+      failed_when: no
+      changed_when: no
+      when: ansible_facts['os_family'] == "Debian"
+      
+    - debug: 
+        msg: msg="{{ scan_results.stdout_lines }}"

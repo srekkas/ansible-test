@@ -6,7 +6,7 @@
   tasks:       
 
     - name: Run Script
-      shell: 'dpkg -l | grep policykit | awk '{print $3}''
+      shell: 'dpkg -l | grep policykit | awk '{print $3}' '
       register: results
       failed_when: no
       changed_when: no

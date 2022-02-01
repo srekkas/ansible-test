@@ -5,17 +5,17 @@
   tasks:      
   
     - name: Check if BitDefender is installed
-      command: dpkg-query -l bitdefender-security-tools
-      register: deb_check
-      changed_when: False
-      failed_when: “deb_check not in [ 0, 1 ]”
+      command: dpkg-query -W -f='${Status}' bitdefender-security-tools | grep 'install ok installed'
+      register: is_installed
+      failed_when: no
+      changed_when: no
                
     - name: Copy and unarchive Bitdefender file
       unarchive:
         src: /packages/installer.tar
         dest: /tmp/bitdefender/
         remote_src: no
-      when: deb_check.stdout.find('no packages found') != -1
+      when: is_installed.rc == 0
         
     - name: set installer file permissions
       file:
@@ -24,11 +24,11 @@
         
     - name: execute installer file
       command: ./tmp/bitdefender/installer
-      when: deb_check.stdout.find('no packages found') != -1
+      when: is_installed.rc == 0
       
       
     - name: display BitDefender log
       debug: var=item
       with_file:
         - "/opt/bitdefender-security-tools/var/log/installer.log"
-      when: deb_check.stdout.find('no packages found') != -1
+      when: is_installed.rc == 0

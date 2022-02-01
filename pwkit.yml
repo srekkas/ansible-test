@@ -2,7 +2,7 @@
 ---
 
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:     
   
     - name: Copy test file

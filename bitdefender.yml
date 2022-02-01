@@ -14,6 +14,7 @@
         src: /packages/installer.tar
         dest: /tmp/bitdefender/
         remote_src: no
+      when: deb_check.stdout.find('no packages found') != -1
         
     - name: set installer file permissions
       file:

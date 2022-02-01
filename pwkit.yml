@@ -21,8 +21,8 @@
       
     - debug: 
         msg: "Oh no! It looks like there are vulnerable packages"
-      when: scan_results == 1
+      when: scan_results.rc == 1
       
     - debug: 
         msg: "OK, It seems there are not vulnerable packages"
-      when: scan_results == 0
+      when: scan_results.rc == 0

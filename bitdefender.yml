@@ -2,6 +2,10 @@
 
 - hosts: all
   gather_facts: true
+  vars:
+    newline_character: "\n"
+    services_running: []
+    services_NOT_running: []
   tasks:      
   
     - name: Check if BitDefender is installed
@@ -37,8 +41,12 @@
         chdir: /tmp/bitdefender/
       when: is_installed.rc != 0
       
-    - name: display BitDefender log
-      debug: var=item
-      with_file:
-        - "/opt/bitdefender-security-tools/var/log/installer.log"
-      when: is_installed.rc != 0
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+      
+   - name: check if TFA is installed
+     fail:
+       msg:  Bitdefender Security Tools Daemon service status
+     when: ansible_facts.services["bdsec-daemon.service"] is not defined
+      
+

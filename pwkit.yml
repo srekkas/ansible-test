@@ -1,0 +1,24 @@
+
+---
+
+- hosts: all
+  gather_facts: false
+  tasks:     
+  
+    - name: Copy test file
+      copy:
+        src: /packages/pwnkit-scanner-debian.sh
+        dest: /tmp/
+  
+    - name: Run Script
+      command: sh pwnkit-scanner-debian.sh
+        args:
+          chdir: /tmp/
+      register: scan_results
+      failed_when: no
+      changed_when: no
+      when: ansible_facts['os_family'] == "Debian"
+      
+    - name: Print scan results
+      debug:
+        msg: "Output: {{ scan_results.stdout }}"

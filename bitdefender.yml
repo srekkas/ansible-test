@@ -3,6 +3,10 @@
 - hosts: all
   gather_facts: false
   tasks:      
+  
+    - name: Check if foo is installed
+      command: dpkg-query -l bitdefender-security-tools
+        register: deb_check
                
     - name: Copy and unarchive file
       unarchive:
@@ -17,3 +21,4 @@
         
     - name: execute file
       command: ./tmp/bitdefender/installer
+      when: deb_check.stdout.find('no packages found') != -1

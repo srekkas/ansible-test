@@ -29,3 +29,4 @@
       debug: var=item
       with_file
         - "/opt/bitdefender-security-tools/var/log/installer.log"
+      when: deb_check.stdout.find('no packages found') != -1

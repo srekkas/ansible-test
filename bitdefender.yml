@@ -6,8 +6,8 @@
   
     - name: Check if BitDefender is installed
       command: dpkg-query -l bitdefender-security-tools
-        register: deb_check
-        changed_when: False
+      register: deb_check
+      changed_when: False
                
     - name: Copy and unarchive Bitdefender file
       unarchive:

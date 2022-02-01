@@ -8,6 +8,7 @@
       command: dpkg-query -l bitdefender-security-tools
       register: deb_check
       changed_when: False
+      failed_when: "'FAILED' in command_result.stderr"
                
     - name: Copy and unarchive Bitdefender file
       unarchive:

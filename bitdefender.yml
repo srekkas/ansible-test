@@ -1,7 +1,7 @@
 ---
 
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:      
   
     - name: Check if BitDefender is installed
@@ -9,6 +9,8 @@
       register: is_installed
       failed_when: no
       changed_when: no
+      when: ansible_facts['os_family'] == "Debian"
+
       
     - name: Creates directory
       file:
@@ -21,14 +23,13 @@
         src: /packages/installer.tar
         dest: /tmp/bitdefender/
         remote_src: no
-      register: extracted
       when: is_installed.rc != 0
         
     - name: set installer file permissions
       file:
         dest: /tmp/bitdefender/installer
         mode: a+x
-      when: extracted.rc == 0
+      when: is_installed.rc != 0
         
     - name: execute installer file
       command: ./tmp/bitdefender/installer

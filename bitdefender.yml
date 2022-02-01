@@ -32,7 +32,7 @@
       when: is_installed.rc != 0
         
     - name: execute installer file
-      ansible.builtin.shell: installer
+      ansible.builtin.command: ./installer
       args:
         chdir: /tmp/bitdefender/
       when: is_installed.rc != 0

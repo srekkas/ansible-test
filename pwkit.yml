@@ -23,6 +23,6 @@
         msg: "Oh no! It looks like there are vulnerable packages"
       when: scan_results == 1
       
-     - debug: 
+    - debug: 
         msg: "OK, It seems there are not vulnerable packages"
       when: scan_results == 0

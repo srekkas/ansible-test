@@ -14,4 +14,4 @@
       when: ansible_facts['os_family'] == "Debian"
       
     - debug: 
-        msg: msg="{{ scan_results.stdout_lines }}"
+        msg: msg="{{ scan_results }}"

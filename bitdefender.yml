@@ -9,6 +9,12 @@
       register: is_installed
       failed_when: no
       changed_when: no
+      
+    - name: Creates directory
+      file:
+        path: /tmp/bitdefender
+        state: directory
+      when: is_installed.rc != 0
                
     - name: Copy and unarchive Bitdefender file
       unarchive:

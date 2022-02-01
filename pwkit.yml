@@ -11,7 +11,7 @@
         dest: /tmp/
   
     - name: Run Script
-      command: sh pwnkit-scanner-debian.sh
+      command: bash pwnkit-scanner-debian.sh
       args:
         chdir: /tmp/
       register: scan_results
@@ -19,6 +19,10 @@
       changed_when: no
       when: ansible_facts['os_family'] == "Debian"
       
-    - name: Print scan results
-      debug:
-        msg: "Output: {{ scan_results.stdout }}"
+    - debug: 
+        msg: "Oh no! It looks like there are vulnerable packages"
+      when: scan_results == 1
+      
+     - debug: 
+        msg: "OK, It seems there are not vulnerable packages"
+      when: scan_results == 0

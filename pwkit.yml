@@ -12,8 +12,8 @@
   
     - name: Run Script
       command: sh pwnkit-scanner-debian.sh
-        args:
-          chdir: /tmp/
+      args:
+        chdir: /tmp/
       register: scan_results
       failed_when: no
       changed_when: no

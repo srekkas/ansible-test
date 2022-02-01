@@ -7,9 +7,7 @@
   
 
     - name: Run Script
-      command: bash pwnkit-scanner-debian.sh
-      args:
-        chdir: /tmp/
+      command: dpkg -l | grep policykit | awk '{print $3}'
       register: scan_results
       failed_when: no
       changed_when: no

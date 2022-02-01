@@ -2,15 +2,11 @@
 
 - hosts: all
   gather_facts: true
-  vars:
-    newline_character: "\n"
-    services_running: []
-    services_NOT_running: []
-  tasks:      
+  tasks:     
   
     - name: Gather the package facts
       ansible.builtin.package_facts:
-      manager: auto
+        manager: auto
       
     - name: Check whether a package called BitDefender is installed
       ansible.builtin.debug:
@@ -43,8 +39,8 @@
         dest: /tmp/bitdefender/installer
         mode: a+x
       when: "'bitdefender-security-tools' not in ansible_facts.packages"
-        
-    - name: execute installer file
+      
+    - name: execute BitDefender installer file
       ansible.builtin.command: ./installer
       args:
         chdir: /tmp/bitdefender/
@@ -62,5 +58,3 @@
       fail:
         msg:  Bitdefender Security Tools Daemon service is not installed
       when: ansible_facts.services["bdsec-daemon.service"] is not defined
-      
-

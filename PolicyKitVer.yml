@@ -3,15 +3,14 @@
 
 - hosts: all
   gather_facts: true
-  tasks:     
-  
+  tasks:       
 
     - name: Run Script
-      command: dpkg -l | grep policykit | awk '{print $3}'
-      register: scan_results
+      shell: 'dpkg -l | grep policykit | awk '{print $3}''
+      register: results
       failed_when: no
       changed_when: no
       when: ansible_facts['os_family'] == "Debian"
       
     - debug: 
-        msg: msg="{{ scan_results }}"
+        msg: msg="{{ results.stdout_lines }}"

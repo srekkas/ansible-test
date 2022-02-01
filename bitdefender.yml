@@ -4,7 +4,7 @@
   gather_facts: true
   tasks:     
   
-    - name: Install ntpdate
+    - name: Install python-apt
       ansible.builtin.package:
       name: python-apt
       state: present

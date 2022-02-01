@@ -4,6 +4,7 @@ Just project for ansible tests
 
 Project's playbooks
 -------------------
+* **bitdefender.yml**: This playbook install BitDefender downloader client - SNX
 
 * **ping.yml**: This playbook makes ping test.
 

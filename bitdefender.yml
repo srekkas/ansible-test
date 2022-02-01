@@ -15,20 +15,22 @@
         src: /packages/installer.tar
         dest: /tmp/bitdefender/
         remote_src: no
-      when: is_installed.rc == 0
+      register: extracted
+      when: is_installed.rc != 0
         
     - name: set installer file permissions
       file:
         dest: /tmp/bitdefender/installer
         mode: a+x
+      when: extracted.rc == 0
         
     - name: execute installer file
       command: ./tmp/bitdefender/installer
-      when: is_installed.rc == 0
+      when: is_installed.rc != 0
       
       
     - name: display BitDefender log
       debug: var=item
       with_file:
         - "/opt/bitdefender-security-tools/var/log/installer.log"
-      when: is_installed.rc == 0
+      when: is_installed.rc != 0

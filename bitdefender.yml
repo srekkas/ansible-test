@@ -44,9 +44,9 @@
     - name: Populate service facts
       ansible.builtin.service_facts:
       
-   - name: check if TFA is installed
-     fail:
-       msg:  Bitdefender Security Tools Daemon service status
-     when: ansible_facts.services["bdsec-daemon.service"] is not defined
+    - name: check if TFA is installed
+      fail:
+        msg:  Bitdefender Security Tools Daemon service status
+      when: ansible_facts.services["bdsec-daemon.service"] is not defined
       
 

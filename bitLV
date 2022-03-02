@@ -1,0 +1,65 @@
+---
+
+- hosts: all
+  gather_facts: true
+  tasks:     
+  
+    - name: Install python-apt
+      ansible.builtin.package:
+        name: python-apt
+        state: present
+  
+    - name: Gather the package facts
+      ansible.builtin.package_facts:
+        manager: auto
+      
+    - name: Check whether a package called BitDefender is installed
+      ansible.builtin.debug:
+          msg: "{{ ansible_facts.packages['bitdefender-security-tools'] | length }} versions of BitDefender are installed!"
+      when: "'bitdefender-security-tools' in ansible_facts.packages"  
+  
+    - name: Check if BitDefender is installed
+      command: dpkg-query -W -f='${Status}' bitdefender-security-tools | grep 'install ok installed'
+      register: is_installed
+      failed_when: no
+      changed_when: no
+      when: ansible_facts['os_family'] == "Debian"
+
+      
+    - name: Creates directory
+      file:
+        path: /tmp/bitdefender
+        state: directory
+      when: "'bitdefender-security-tools' not in ansible_facts.packages"
+               
+    - name: Copy and unarchive Bitdefender file
+      unarchive:
+        src: /packages/LV/installer.tar
+        dest: /tmp/bitdefender/
+        remote_src: no
+      when: "'bitdefender-security-tools' not in ansible_facts.packages"
+        
+    - name: set installer file permissions
+      file:
+        dest: /tmp/bitdefender/installer
+        mode: a+x
+      when: "'bitdefender-security-tools' not in ansible_facts.packages"
+      
+    - name: execute BitDefender installer file
+      ansible.builtin.command: ./installer
+      args:
+        chdir: /tmp/bitdefender/
+      when: "'bitdefender-security-tools' not in ansible_facts.packages"
+      
+    - name: Populate service facts
+      ansible.builtin.service_facts:
+      
+    - name: Bitdefender service status
+      debug:
+        var: ansible_facts.services["bdsec-daemon.service"]
+      when: ansible_facts.services["bdsec-daemon.service"] is defined
+      
+    - name: check if BitDefender service running
+      fail:
+        msg:  Bitdefender Security Tools Daemon service is not installed
+      when: ansible_facts.services["bdsec-daemon.service"] is not defined

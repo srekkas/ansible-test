@@ -17,14 +17,6 @@
       ansible.builtin.debug:
           msg: "{{ ansible_facts.packages['bitdefender-security-tools'] | length }} versions of BitDefender are installed!"
       when: "'bitdefender-security-tools' in ansible_facts.packages"  
-  
-    - name: Check if BitDefender is installed
-      command: dpkg-query -W -f='${Status}' bitdefender-security-tools | grep 'install ok installed'
-      register: is_installed
-      failed_when: no
-      changed_when: no
-      when: ansible_facts['os_family'] == "Debian"
-
       
     - name: Creates directory
       file:

@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+  gather_facts: true
+  tasks:     
+  
+    - name: Copy test file
+      copy:
+        src: /packages/CVE-2021-4034_Finder.py
+        dest: /tmp/
+  
+    - name: Run Script
+      command: python3 CVE-2021-4034_Finder.py
+      args:
+        chdir: /tmp/
+      register: scan_results
+      failed_when: no
+      changed_when: no
+      when: ansible_facts['os_family'] == "Debian"
+      
+    - debug: 
+        msg: "Oh no! It looks like there are vulnerable packages"
+      when: scan_results.rc == 1
+      
+    - debug: 
+        msg: "OK, It seems there are not vulnerable packages"
+      when: scan_results.rc == 0
+      
+    - debug: 
+        msg: msg="{{ scan_results.stdout_lines }}"

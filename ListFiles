@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  gather_facts: true
+  tasks:       
+
+    - name: Run Script
+      shell: 'ls /etc/rsyslog.d/'
+      register: results
+      failed_when: no
+      changed_when: no
+      
+    - debug: 
+        msg: msg="{{ results.stdout_lines }}"

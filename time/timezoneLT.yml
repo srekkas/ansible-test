@@ -5,26 +5,26 @@
   - name: Check if systemd-timesyncd service exists
     command: systemctl cat systemd-timesyncd
     check_mode: no
-    register: systemd-timesyncd
+    register: systemd-timesyncd_exists
     changed_when: False
-    failed_when: systemd-timesyncd.rc not in [0, 1]
+    failed_when: systemd-timesyncd_exists.rc not in [0, 1]
   
   - name: set timezone
     shell: timedatectl set-timezone Europe/Vilnius
-    when: systemd-timesyncd == 0
+    when: systemd-timesyncd_exists == 0
 
   - name: Make sure timesyncd is stopped
     systemd:
       name: systemd-timesyncd.service
       state: stopped
-    when: systemd-timesyncd == 0
+    when: systemd-timesyncd_exists == 0
 
   - name: Copy over the timesyncd config
     template: src=/packages/timesyncd.conf dest=/etc/systemd/timesyncd.conf
-    when: systemd-timesyncd == 0
+    when: systemd-timesyncd_exists == 0
 
   - name: Make sure timesyncd is started
     systemd:
       name: systemd-timesyncd.service
       state: started
-    when: systemd-timesyncd == 0
+    when: systemd-timesyncd_exists == 0

@@ -1,0 +1,9 @@
+- name: Check if zabbix agent is installed
+  hosts: "*"
+  tasks:
+  
+  - name: Populate service facts
+    service_facts:
+  - debug:
+      msg: Zabbix Agent installed!
+    when: ansible_facts.services['zabbix-agent.service'] is defined

@@ -1,0 +1,9 @@
+- name: Check if Bitdefender service is installed
+  hosts: "*"
+  tasks:
+  
+  - name: Populate service facts
+    service_facts:
+  - debug:
+      msg: Bitdefender installed!
+    when: ansible_facts.services['bdsec-daemon.service'] is defined

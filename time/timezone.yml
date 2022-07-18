@@ -9,7 +9,7 @@
     when: ansible_facts.services['systemd-timesyncd.service'] is defined
 
   - name: set timezone
-    shell: timedatectl set-timezone Europe/Vilnius
+    shell: timedatectl set-timezone {{ timezone }}
     when: ansible_facts.services['systemd-timesyncd.service'] is defined
 
   - name: Make sure timesyncd is stopped
@@ -19,7 +19,7 @@
     when: ansible_facts.services['systemd-timesyncd.service'] is defined
 
   - name: Copy over the timesyncd config
-    template: src=/packages/timesyncd.conf dest=/etc/systemd/timesyncd.conf
+    template: src={{ timezonefile }} dest=/etc/systemd/timesyncd.conf
     when: ansible_facts.services['systemd-timesyncd.service'] is defined
 
   - name: Make sure timesyncd is started

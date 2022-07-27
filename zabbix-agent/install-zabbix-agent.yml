@@ -5,7 +5,7 @@
       - name: gather os specific variables
         include_vars: "{{ item }}"
         with_first_found:
-            - "vars/{{ ansible_distribution }}.yaml"
+            - "vars/{{ ansible_distribution }}.yml"
 
       - name: Download zabbix repo package
         get_url:
